@@ -1,0 +1,128 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+	<style>
+		/* We want our scene to span the entire window */
+		body { margin: 0; }
+	</style>
+</head>
+<body>
+
+	<script id="fragShader" type="shader-code">
+		uniform vec2 resolution;
+		void main()
+		{
+			vec2 position = gl_FragCoord.xy / resolution.xy;
+			gl_FragColor = vec4(1.0, position.x, position.y, 1.0);
+		}
+	</script>
+	
+	<script id="blueShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+		}
+	</script>
+	
+	<script id="redShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		}
+	</script>
+	
+	<!-- CMYW -->
+	<script id="cyanShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		}
+	</script>
+	
+	<script id="magentaShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+		}
+	</script>
+	
+	<script id="whiteShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+		}
+	</script>
+	
+	<script>
+		//@author Omar Shehata. 2015.
+		//We are loading the Three.js library from the cdn here: http://cdnjs.com/libraries/three.js/
+		var scene;
+		var camera;
+		var renderer;
+
+		function scene_setup(){
+			//This is all code needed to set up a basic ThreeJS scene
+
+			//First we initialize the scene and our camera
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			//We create the WebGL renderer and add it to the document
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+		}
+
+		scene_setup();
+
+		//Add your code here!
+
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		var material = new THREE.MeshBasicMaterial({color: 0x00ff00}); // Green
+		var cube = new THREE.Mesh(geometry, material);
+		scene.add(cube); // this renders it to the screen
+		cube.position.z = -3; // shift the cube back so we can see it
+		
+		var shaderCode = document.getElementById("fragShader").innerHTML;
+		var blueShaderCode = document.getElementById("blueShader").innerHTML;
+		var redShaderCode = document.getElementById("redShader").innerHTML;
+		
+		var uniforms = {};
+		uniforms.resolution = {type:"v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)};
+		
+		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader:shaderCode})
+		var geometry = new THREE.PlaneGeometry(10, 10);
+		var sprite = new THREE.Mesh(geometry, material);
+		scene.add(sprite);
+		sprite.position.z = -1; // Moving it back so that we can see it
+		
+		// Now, my plane
+		var blueMaterial = new THREE.ShaderMaterial({fragmentShader:blueShaderCode})
+		var blueGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+		var blueSprite = new THREE.Mesh(blueGeometry, blueMaterial);
+		scene.add(blueSprite);
+		blueSprite.position.z = -1;
+		
+		var redMaterial = new THREE.ShaderMaterial({fragmentShader:redShaderCode})
+		var redGeometry = new THREE.PlaneGeometry(0.25, 0.25);
+		var redSprite = new THREE.Mesh(redGeometry, redMaterial);
+		scene.add(redSprite);
+		redSprite.position.z = -1;
+		
+		// And the red plane!
+		
+
+		//Render everything!
+		function render() {
+			cube.rotation.x += 0.02;
+			cube.rotation.y += 0.02;
+			cube.rotation.z += 0.02;
+			
+			requestAnimationFrame( render );
+			renderer.render( scene, camera );
+		}
+		render();
+	</script>
+
+</body>
+</html>
