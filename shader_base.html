@@ -45,6 +45,13 @@
 			gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
 		}
 	</script>
+
+	<script id="yellowShader" type="shader-code">
+		void main()
+		{
+			gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+		}
+	</script>
 	
 	<script id="whiteShader" type="shader-code">
 		void main()
@@ -86,6 +93,7 @@
 		var shaderCode = document.getElementById("fragShader").innerHTML;
 		var blueShaderCode = document.getElementById("blueShader").innerHTML;
 		var redShaderCode = document.getElementById("redShader").innerHTML;
+		var cyanShaderCode = document.getElementById("cyanShader").innerHTML;
 		
 		var uniforms = {};
 		uniforms.resolution = {type:"v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)};
@@ -103,15 +111,15 @@
 		scene.add(blueSprite);
 		blueSprite.position.z = -1;
 		
+		// And the red plane!
 		var redMaterial = new THREE.ShaderMaterial({fragmentShader:redShaderCode})
 		var redGeometry = new THREE.PlaneGeometry(0.25, 0.25);
 		var redSprite = new THREE.Mesh(redGeometry, redMaterial);
 		scene.add(redSprite);
 		redSprite.position.z = -1;
 		
-		// And the red plane!
-
 		// Section 1: Cyan
+		var cyanMaterial = new THREE.ShaderMaterial({fragmentShader:cyanShaderCode})
 
 		// Section 2: Magenta
 
