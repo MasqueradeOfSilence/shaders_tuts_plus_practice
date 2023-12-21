@@ -35,7 +35,7 @@
 	<script id="cyanShader" type="shader-code">
 		void main()
 		{
-			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+			gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
 		}
 	</script>
 	
@@ -94,6 +94,9 @@
 		var blueShaderCode = document.getElementById("blueShader").innerHTML;
 		var redShaderCode = document.getElementById("redShader").innerHTML;
 		var cyanShaderCode = document.getElementById("cyanShader").innerHTML;
+		var magentaShaderCode = document.getElementById("magentaShader").innerHTML;
+		var whiteShaderCode = document.getElementById("whiteShader").innerHTML;
+		var yellowShaderCode = document.getElementById("yellowShader").innerHTML;
 		
 		var uniforms = {};
 		uniforms.resolution = {type:"v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)};
@@ -120,12 +123,37 @@
 		
 		// Section 1: Cyan
 		var cyanMaterial = new THREE.ShaderMaterial({fragmentShader:cyanShaderCode})
+		var cyanGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+		var cyanSprite = new THREE.Mesh(cyanGeometry, cyanMaterial);
+		scene.add(cyanSprite);
+		cyanSprite.position.z = -1;
+		cyanSprite.position.x -= 1;
 
 		// Section 2: Magenta
+		var magentaMaterial = new THREE.ShaderMaterial({fragmentShader:magentaShaderCode})
+		var magentaGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+		var magentaSprite = new THREE.Mesh(magentaGeometry, magentaMaterial);
+		scene.add(magentaSprite);
+		magentaSprite.position.z = -1;
+		magentaSprite.position.x += 1;
 
 		// Section 3: White
+		var whiteMaterial = new THREE.ShaderMaterial({fragmentShader:whiteShaderCode})
+		var whiteGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+		var whiteSprite = new THREE.Mesh(whiteGeometry, whiteMaterial);
+		scene.add(whiteSprite);
+		whiteSprite.position.z = -1;
+		whiteSprite.position.x -= 1;
+		whiteSprite.position.y -= 0.5;
 
 		// Section 4: Yellow
+		var yellowMaterial = new THREE.ShaderMaterial({fragmentShader:yellowShaderCode})
+		var yellowGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+		var yellowSprite = new THREE.Mesh(yellowGeometry, yellowMaterial);
+		scene.add(yellowSprite);
+		yellowSprite.position.z = -1;
+		yellowSprite.position.x += 1;
+		yellowSprite.position.y -= 0.5;
 		
 
 		//Render everything!
