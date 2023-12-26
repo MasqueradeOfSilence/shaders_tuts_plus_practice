@@ -120,6 +120,10 @@
 		var redSprite = new THREE.Mesh(redGeometry, redMaterial);
 		scene.add(redSprite);
 		redSprite.position.z = -1;
+
+		// CMYK screen division
+		var screenWidth = window.innerWidth;
+		var screenHeight = window.innerHeight;
 		
 		// Section 1: Cyan
 		var cyanMaterial = new THREE.ShaderMaterial({fragmentShader:cyanShaderCode})
