@@ -130,7 +130,8 @@
 		var cyanGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var cyanSprite = new THREE.Mesh(cyanGeometry, cyanMaterial);
 		scene.add(cyanSprite);
-		cyanSprite.position.z = -1;
+		// NOTE: -2 is just to move them back to see the gradient 
+		cyanSprite.position.z = -2;
 		cyanSprite.position.x = -screenWidth / 4.0;
 		cyanSprite.position.y = screenHeight / 4.0;
 
@@ -139,7 +140,7 @@
 		var magentaGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var magentaSprite = new THREE.Mesh(magentaGeometry, magentaMaterial);
 		scene.add(magentaSprite);
-		magentaSprite.position.z = -1;
+		magentaSprite.position.z = -2;
 		magentaSprite.position.x = screenWidth / 4.0;
 		magentaSprite.position.y = screenHeight / 4.0;
 
@@ -148,7 +149,7 @@
 		var whiteGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var whiteSprite = new THREE.Mesh(whiteGeometry, whiteMaterial);
 		scene.add(whiteSprite);
-		whiteSprite.position.z = -1;
+		whiteSprite.position.z = -2;
 		whiteSprite.position.x = -screenWidth / 4.0;
 		whiteSprite.position.y = -screenHeight / 4.0;
 
@@ -157,7 +158,7 @@
 		var yellowGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var yellowSprite = new THREE.Mesh(yellowGeometry, yellowMaterial);
 		scene.add(yellowSprite);
-		yellowSprite.position.z = -1;
+		yellowSprite.position.z = -2;
 		yellowSprite.position.x = screenWidth / 4.0;
 		yellowSprite.position.y = -screenHeight / 4.0;
 		
@@ -167,6 +168,10 @@
 			cube.rotation.x += 0.02;
 			cube.rotation.y += 0.02;
 			cube.rotation.z += 0.02;
+
+			// Updating data uponn window resize
+			uniforms.resolution.value.x = window.innerWidth;
+			uniforms.resolution.value.y = window.innerHeight;
 			
 			requestAnimationFrame( render );
 			renderer.render( scene, camera );
