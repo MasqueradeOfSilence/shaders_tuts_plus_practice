@@ -170,6 +170,9 @@
 			cube.rotation.y += 0.02;
 			cube.rotation.z += 0.02;
 
+			// Changing the color over time: Get time in seconds
+			const time = performance.now() * 0.001;
+
 			// Updating data uponn window resize
 			uniforms.resolution.value.x = window.innerWidth;
 			uniforms.resolution.value.y = window.innerHeight;
