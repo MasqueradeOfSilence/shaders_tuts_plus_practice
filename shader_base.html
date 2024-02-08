@@ -172,6 +172,8 @@
 
 			// Changing the color over time: Get time in seconds
 			const time = performance.now() * 0.001;
+			// Increase the 30 = faster, decrease = slower
+			const hue = (time * 30) % 360;
 
 			// Updating data uponn window resize
 			uniforms.resolution.value.x = window.innerWidth;
