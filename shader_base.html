@@ -176,6 +176,8 @@
 			const hue = (time * 30) % 360;
 			// Convert HSL to RGB
 			const rgbColor = new THREE.Color().setHSL(hue / 360, 1, 0.5);
+			// Update cube material color
+			cube.material.color.copy(rgbColor);
 
 			// Updating data uponn window resize
 			uniforms.resolution.value.x = window.innerWidth;
