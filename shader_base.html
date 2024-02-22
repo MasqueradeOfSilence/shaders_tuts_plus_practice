@@ -88,7 +88,7 @@
 		var material = new THREE.MeshBasicMaterial({color: 0x00ff00}); // Green
 		var cube = new THREE.Mesh(geometry, material);
 		scene.add(cube); // this renders it to the screen
-		cube.position.z = -3; // shift the cube back so we can see it
+		cube.position.z = -2; // shift the cube back so we can see it
 		
 		var shaderCode = document.getElementById("fragShader").innerHTML;
 		var blueShaderCode = document.getElementById("blueShader").innerHTML;
@@ -105,7 +105,7 @@
 		var geometry = new THREE.PlaneGeometry(10, 10);
 		var sprite = new THREE.Mesh(geometry, material);
 		scene.add(sprite);
-		sprite.position.z = -1; // Moving it back so that we can see it
+		sprite.position.z = -2; // Moving it back so that we can see it
 		
 		// Now, my plane
 		var blueMaterial = new THREE.ShaderMaterial({fragmentShader:blueShaderCode})
@@ -131,7 +131,7 @@
 		var cyanSprite = new THREE.Mesh(cyanGeometry, cyanMaterial);
 		scene.add(cyanSprite);
 		// NOTE: -2 is just to move them back to see the gradient 
-		cyanSprite.position.z = -2;
+		cyanSprite.position.z = -3;
 		cyanSprite.position.x = -screenWidth / 4.0;
 		cyanSprite.position.y = screenHeight / 4.0;
 
@@ -140,7 +140,7 @@
 		var magentaGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var magentaSprite = new THREE.Mesh(magentaGeometry, magentaMaterial);
 		scene.add(magentaSprite);
-		magentaSprite.position.z = -2;
+		magentaSprite.position.z = -3;
 		magentaSprite.position.x = screenWidth / 4.0;
 		magentaSprite.position.y = screenHeight / 4.0;
 
@@ -149,7 +149,7 @@
 		var whiteGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var whiteSprite = new THREE.Mesh(whiteGeometry, whiteMaterial);
 		scene.add(whiteSprite);
-		whiteSprite.position.z = -2;
+		whiteSprite.position.z = -3;
 		whiteSprite.position.x = -screenWidth / 4.0;
 		whiteSprite.position.y = -screenHeight / 4.0;
 
@@ -158,7 +158,7 @@
 		var yellowGeometry = new THREE.PlaneGeometry(screenWidth / 2.0, screenHeight / 2.0);
 		var yellowSprite = new THREE.Mesh(yellowGeometry, yellowMaterial);
 		scene.add(yellowSprite);
-		yellowSprite.position.z = -2;
+		yellowSprite.position.z = -3;
 		yellowSprite.position.x = screenWidth / 4.0;
 		yellowSprite.position.y = -screenHeight / 4.0;
 		
