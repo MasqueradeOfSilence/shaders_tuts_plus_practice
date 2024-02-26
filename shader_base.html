@@ -97,6 +97,10 @@
 		var magentaShaderCode = document.getElementById("magentaShader").innerHTML;
 		var whiteShaderCode = document.getElementById("whiteShader").innerHTML;
 		var yellowShaderCode = document.getElementById("yellowShader").innerHTML;
+
+		// Loading jelly beans image from example
+		THREE.ImageUtils.crossOrigin = '';//Allows us to load an external image 
+		var tex = THREE.ImageUtils.loadTexture( "https://tutsplus.github.io/Beginners-Guide-to-Shaders/Part2/SIPI_Jelly_Beans.jpg" );
 		
 		var uniforms = {};
 		uniforms.resolution = {type:"v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)};
