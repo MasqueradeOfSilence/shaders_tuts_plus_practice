@@ -104,6 +104,7 @@
 		
 		var uniforms = {};
 		uniforms.resolution = {type:"v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)};
+		uniforms.texture = {type:'t',value:tex};
 		
 		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader:shaderCode})
 		var geometry = new THREE.PlaneGeometry(10, 10);
