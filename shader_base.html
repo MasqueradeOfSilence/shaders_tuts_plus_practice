@@ -15,6 +15,7 @@
 		{
 			vec2 position = gl_FragCoord.xy / resolution.xy;
 			gl_FragColor = vec4(1.0, position.x, position.y, 1.0);
+			gl_FragColor = texture2D(texture, position);
 		}
 	</script>
 	
