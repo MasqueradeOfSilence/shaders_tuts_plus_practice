@@ -185,6 +185,7 @@
 			const rgbColor = new THREE.Color().setHSL(hue / 360, 1, 0.5);
 			// Update cube material color
 			cube.material.color.copy(rgbColor);
+			// color -> grayscale for texture
 
 			// Updating data upon window resize
 			uniforms.resolution.value.x = window.innerWidth;
