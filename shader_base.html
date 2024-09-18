@@ -110,7 +110,8 @@
 		uniforms.texture = {type:'t',value:tex};
 		
 		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader:shaderCode})
-		var geometry = new THREE.PlaneGeometry(10, 10);
+		// var geometry = new THREE.PlaneGeometry(10, 10);
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var sprite = new THREE.Mesh(geometry, material);
 		scene.add(sprite);
 		sprite.position.z = -2; // Moving it back so that we can see it
