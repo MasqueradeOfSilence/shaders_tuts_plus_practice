@@ -110,7 +110,7 @@
 		uniforms.texture = {type:'t',value:tex};
 		
 		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader:shaderCode})
-		// var geometry = new THREE.PlaneGeometry(10, 10);
+		//var geometry = new THREE.PlaneGeometry(10, 10);
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var sprite = new THREE.Mesh(geometry, material);
 		scene.add(sprite);
@@ -178,6 +178,9 @@
 			cube.rotation.x += 0.02;
 			cube.rotation.y += 0.02;
 			cube.rotation.z += 0.02;
+			sprite.rotation.x += 0.04;
+			sprite.rotation.y += 0.04;
+			sprite.rotation.z += 0.04;
 
 			// Changing the color over time: Get time in seconds
 			const time = performance.now() * 0.001;
