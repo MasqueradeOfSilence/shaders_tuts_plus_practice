@@ -10,6 +10,15 @@
 <body>
 
 	<script id="fragShader" type="shader-code">
+		uniform sampler2D tex;
+		uniform vec2 res;
+		void main() 
+		{
+			vec2 pixel = gl_FragCoord.xy / res.xy;
+		}
+	</script>
+
+	<script>
 		
 	</script>
 
