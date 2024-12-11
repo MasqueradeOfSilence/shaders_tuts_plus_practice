@@ -10,7 +10,7 @@
 <body>
 
 	<script id="fragShader" type="shader-code">
-		uniform sampler2D tex;
+		uniform sampler2D texture;
 		uniform vec2 res;
 		void main() 
 		{
@@ -19,7 +19,14 @@
 	</script>
 
 	<script>
-		
+		var scene;
+		var camera;
+		var renderer;
+		var uniforms = 
+		{
+			tex: { type: "t", value: texture },
+			res: { type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+		}
 	</script>
 
 </body>
