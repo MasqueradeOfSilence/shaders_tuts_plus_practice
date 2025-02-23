@@ -10,22 +10,13 @@
 <body>
 
 	<script id="fragShader" type="shader-code">
-		uniform sampler2D texture;
+		uniform sampler2D tex;
 		uniform vec2 res;
 		void main() 
 		{
 			vec2 pixel = gl_FragCoord.xy / res.xy;
-		}
-	</script>
-
-	<script>
-		var scene;
-		var camera;
-		var renderer;
-		var uniforms = 
-		{
-			tex: { type: "t", value: texture },
-			res: { type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+			vec4 color = texture2D(tex, pixel);
+			gl_FragColor = color;
 		}
 	</script>
 
@@ -41,16 +32,37 @@
 
 			//First we initialize the scene and our camera
 			scene = new THREE.Scene();
-			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 			//We create the WebGL renderer and add it to the document
 			renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
 		}
 
 		scene_setup();
 
+		var shaderCode = document.getElementById("fragShader").innerHTML;
+		// hardcoded; sourced from the TutsPlus tutorial
+		var textureURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/images/blocks.JPG"
+		THREE.ImageUtils.crossOrigin = "";
+		var texture = THREE.ImageUtils.loadTexture(textureURL);
+		var uniforms = {
+			tex : {type: "t", value: texture},
+			res : {type: "v2", value: new THREE.Vector2(window.innerWidth,window.innerHeight)}
+		}
+		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader: shaderCode})
+		var geometry = new THREE.PlaneGeometry(10, 10);
+		var sprite = new THREE.Mesh(geometry, material);
+		scene.add(sprite);
+		// camera must be moved back in order to actually see the texture...
+		camera.position.z = 2;
+
+		function render() {
+			requestAnimationFrame(render);
+			renderer.render(scene, camera);
+		}
+		render();
 	</script>
 
 </body>
