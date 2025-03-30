@@ -14,9 +14,7 @@
 		uniform vec2 res;
 		void main() 
 		{
-			float aspectRatio = res.x / res.y;
 			vec2 pixel = gl_FragCoord.xy / res.xy;
-			pixel.xy /= aspectRatio;
 			vec4 color = texture2D(tex, pixel);
 			gl_FragColor = color;
 		}
@@ -55,6 +53,7 @@
 		THREE.ImageUtils.crossOrigin = "";
 		var texture = THREE.ImageUtils.loadTexture(textureURL);
 		var uniforms = {
+			light: {type: "v3", value: new THREE.Vector3()},
 			tex : {type: "t", value: texture},
 			res : {type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)}
 		}
