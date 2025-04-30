@@ -12,11 +12,21 @@
 	<script id="fragShader" type="shader-code">
 		uniform sampler2D tex;
 		uniform vec2 res;
+		uniform vec3 light;
 		void main() 
 		{
 			vec2 pixel = gl_FragCoord.xy / res.xy;
 			vec4 color = texture2D(tex, pixel);
-			gl_FragColor = color;
+			float dist = distance(gl_FragCoord.xy, light.xy);
+			if (light.z * res.x > dist)
+			{
+				gl_FragColor = color * (1.0 - dist / (light.z * res.x));
+			}
+			else
+			{
+				// make it black like your soul
+				gl_FragColor = vec4(0.0);
+			}
 		}
 	</script>
 
@@ -27,7 +37,8 @@
 		var camera;
 		var renderer;
 
-		function scene_setup(){
+		function scene_setup()
+		{
 			//This is all code needed to set up a basic ThreeJS scene
 
 			//First we initialize the scene and our camera
@@ -40,9 +51,17 @@
 			document.body.appendChild(renderer.domElement);
 		}
 
-		function render() {
+		function render() 
+		{
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
+		}
+
+		document.onmousemove = function(event)
+		{
+			// Light should follow the mouse
+			uniforms.light.value.x = event.clientX;
+			uniforms.light.value.y = window.innerHeight - event.clientY;
 		}
 
 		scene_setup();
@@ -52,7 +71,8 @@
 		var textureURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/images/blocks.JPG"
 		THREE.ImageUtils.crossOrigin = "";
 		var texture = THREE.ImageUtils.loadTexture(textureURL);
-		var uniforms = {
+		var uniforms = 
+		{
 			light: {type: "v3", value: new THREE.Vector3()},
 			tex : {type: "t", value: texture},
 			res : {type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)}
