@@ -72,9 +72,10 @@
 		// hardcoded; sourced from the TutsPlus tutorial
 		var textureURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/images/blocks.JPG"
 		THREE.ImageUtils.crossOrigin = "";
-		var texture = THREE.ImageUtils.loadTexture(textureURL);
+		var texture = THREE.ImageUtils.loadTexture(textureURL); // Switch to normalURL if you want to see the normal map rendered as an image.
 		var uniforms = 
 		{
+			norm: {type:'t', value:normal},
 			light: {type: "v3", value: new THREE.Vector3()},
 			tex : {type: "t", value: texture},
 			res : {type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)}
