@@ -17,6 +17,7 @@
 		{
 			vec2 pixel = gl_FragCoord.xy / res.xy;
 			vec4 color = texture2D(tex, pixel);
+			vec4 whiteColor = vec4(1.0);
 			float dist = distance(gl_FragCoord.xy, light.xy);
 			if (light.z * res.x > dist)
 			{
