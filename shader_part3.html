@@ -21,9 +21,13 @@
 			vec4 whiteColor = vec4(1.0);
 			vec3 normalVector = texture2D(norm,pixel).xyz;
 			float dist = distance(gl_FragCoord.xy, light.xy);
+			vec3 lightVector = vec3(light.x - gl_FragCoord.x, light.y - gl_FragCoord.y, 60.0);
+			normalVector = normalize(normalVector);
+			lightVector = normalize(lightVector);
+			float diffuse = dot(normalVector, lightVector);
 			if (light.z * res.x > dist)
 			{
-				gl_FragColor = color * (1.0 - dist / (light.z * res.x));
+				gl_FragColor = color * diffuse * (1.0 - dist / (light.z * res.x));
 			}
 			else
 			{
@@ -40,6 +44,7 @@
 		var camera;
 		var renderer;
 		var normalURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/normal_maps/normal_test.jpg"
+		THREE.ImageUtils.crossOrigin = "";
 		var normal = THREE.ImageUtils.loadTexture(normalURL);
 
 		function scene_setup()
@@ -74,7 +79,6 @@
 		var shaderCode = document.getElementById("fragShader").innerHTML;
 		// hardcoded; sourced from the TutsPlus tutorial
 		var textureURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/images/blocks.JPG"
-		THREE.ImageUtils.crossOrigin = "";
 		var texture = THREE.ImageUtils.loadTexture(normalURL); // Switch to normalURL if you want to see the normal map rendered as an image.
 		var uniforms = 
 		{
