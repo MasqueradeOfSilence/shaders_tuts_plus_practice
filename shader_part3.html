@@ -24,10 +24,11 @@
 			vec3 lightVector = vec3(light.x - gl_FragCoord.x, light.y - gl_FragCoord.y, 60.0);
 			normalVector = normalize(normalVector);
 			lightVector = normalize(lightVector);
-			float diffuse = dot(normalVector, lightVector);
 			if (light.z * res.x > dist)
 			{
-				gl_FragColor = color * diffuse * (1.0 - dist / (light.z * res.x));
+				float diffuse = dot(normalVector, lightVector);
+				float distanceFactor = (1.0 - dist / (light.z * res.x));
+				gl_FragColor = whiteColor * diffuse * distanceFactor;
 			}
 			else
 			{
