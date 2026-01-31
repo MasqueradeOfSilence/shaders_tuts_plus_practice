@@ -20,6 +20,8 @@
 			vec4 color = texture2D(tex, pixel);
 			vec4 whiteColor = vec4(1.0);
 			vec3 normalVector = texture2D(norm,pixel).xyz;
+			normalVector.x -= 0.5;
+        	normalVector.y -= 0.5;
 			float dist = distance(gl_FragCoord.xy, light.xy);
 			vec3 lightVector = vec3(light.x - gl_FragCoord.x, light.y - gl_FragCoord.y, 60.0);
 			normalVector = normalize(normalVector);
