@@ -28,7 +28,7 @@
 			lightVector = normalize(lightVector);
 			if (light.z * res.x > dist)
 			{
-				float diffuse = dot(normalVector, lightVector);
+				float diffuse = max(dot(normalVector, lightVector),0.0);
 				float distanceFactor = (1.0 - dist / (light.z * res.x));
 				gl_FragColor = whiteColor * diffuse * distanceFactor;
 			}
@@ -46,7 +46,8 @@
 		var scene;
 		var camera;
 		var renderer;
-		var normalURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/normal_maps/normal_test.jpg"
+		//var normalURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/normal_maps/normal_test.jpg"
+		var normalURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/normal_maps/blocks_normal.JPG"
 		THREE.ImageUtils.crossOrigin = "";
 		var normal = THREE.ImageUtils.loadTexture(normalURL);
 
