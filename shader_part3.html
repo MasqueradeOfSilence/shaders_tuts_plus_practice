@@ -32,7 +32,7 @@
 			{
 				float diffuse = max(dot(normalVector, lightVector),0.0);
 				float distanceFactor = (1.0 - dist / (light.z * res.x));
-				gl_FragColor = whiteColor * diffuse * distanceFactor;
+				gl_FragColor = color * diffuse * distanceFactor;
 			}
 			else
 			{
@@ -87,7 +87,7 @@
 		var shaderCode = document.getElementById("fragShader").innerHTML;
 		// hardcoded; sourced from the TutsPlus tutorial
 		var textureURL = "https://raw.githubusercontent.com/tutsplus/Beginners-Guide-to-Shaders/master/Part3/images/blocks.JPG"
-		var texture = THREE.ImageUtils.loadTexture(normalURL); // Switch to normalURL if you want to see the normal map rendered as an image.
+		var texture = THREE.ImageUtils.loadTexture(textureURL); // Switch to normalURL if you want to see the normal map rendered as an image.
 		var uniforms = 
 		{
 			norm: {type:'t', value:normal},
