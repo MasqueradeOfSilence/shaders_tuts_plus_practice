@@ -26,6 +26,8 @@
 			vec3 lightVector = vec3(light.x - gl_FragCoord.x, light.y - gl_FragCoord.y, 60.0);
 			normalVector = normalize(normalVector);
 			lightVector = normalize(lightVector);
+			// A bigger value of the normalized z brightens the light.
+			lightVector.z = 1.0;
 			if (light.z * res.x > dist)
 			{
 				float diffuse = max(dot(normalVector, lightVector),0.0);
@@ -37,6 +39,8 @@
 				// make it black like your soul
 				gl_FragColor = vec4(0.0);
 			}
+			//float ambient = 0.5; // TODO fix
+			//gl_FragColor += ambient;
 		}
 	</script>
 
