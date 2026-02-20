@@ -22,11 +22,11 @@
 			vec2 lightPosition = light.xy / res.xy;
 			lightPosition.y = 1.0 - lightPosition.y;
 
-			float dist = distance(gl_FragCoord.xy, light.xy);
+			float dist = distance(gl_FragCoord.xy, vec2(light.x, res.y - light.y));
 			vec3 lightVector = vec3(lightPosition.x - pixel.x, lightPosition.y - pixel.y, light.z);
 			normalVector.x -= 0.5;
         	normalVector.y -= 0.5;
-			float ambient = 0.5;
+			float ambient = 0.1;
 			lightVector += ambient;
 			vec3 normalVectorV3 = normalize(normalVector.xyz);
 			lightVector = normalize(lightVector);
@@ -82,7 +82,7 @@
 		{
 			// Light should follow the mouse
 			uniforms.light.value.x = event.clientX;
-			uniforms.light.value.y = window.innerHeight - event.clientY;
+			uniforms.light.value.y = event.clientY;
 		}
 
 		document.onmousedown = function(event)
@@ -110,7 +110,7 @@
 			tex : {type: "t", value: texture},
 			res : {type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight)}
 		}
-		uniforms.light.value.z = 0.2;
+		uniforms.light.value.z = 0.3;
 		uniforms.light.value.w = 1.0;
 		var material = new THREE.ShaderMaterial({uniforms: uniforms, fragmentShader: shaderCode})
 		var geometry = new THREE.PlaneGeometry(10, 10);
